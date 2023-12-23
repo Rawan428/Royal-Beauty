@@ -1,0 +1,530 @@
+<header section-id="{{ sectionId }}" class='d-flex flex-column'>
+
+	{% include 'template_for_store_messages' %}
+	{% include 'header-announcement-bar.twig' with { 'ab_settings' : settings } %}
+
+
+	<div class="header-top">
+		<div class="container">
+			<div class="header-top-info row">
+
+				<div class="header-top-left col-3">
+					<div class="header-top-phone-email">
+
+						<div class="phone-custom">
+
+
+							<a class="phone-info" href="tel:{{ settings.header_top_text_phone }}" target="_blank">
+								<span>
+									{{ locals.phone }}:&nbsp;{{ settings.header_top_text_phone }}
+								</span>
+							</a>
+						</div>
+
+
+					</div>
+				</div>
+
+
+				<div class="header-top-middel col-6">
+					<div class="ads_banner">
+						<p>
+							{{ settings.header_top_text_ads }}</p>
+					</div>
+
+
+				</div>
+				<div class="header-top-right col-3">
+					{% include 'header-lang-currency.twig' with { 'header_settings' : settings } %}
+				</div>
+
+
+			</div>
+
+		</div>
+
+	</div>
+	<div
+		id="fixed-header" style="z-index: 3">
+		<!-- input search for mobile view -->
+		<div style="z-index: 3">
+			{% include 'header-search-header.twig' with { 'header_settings' : settings } %}
+		</div>
+		<div style="position: relative; z-index: -1">
+			<div class="sm-search-div">
+				<div class="autocomplete" style="position: relative">
+					<input type="text" data-cat-id="{{ category.id }}" class="form-control search-input-input" placeholder="{% if header_settings.search_placeholder %}{{ header_settings.search_placeholder }}{% else %}{{ locals.search_placeholder }}{% endif %}">
+					<div class="autocomplete-items"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% include 'header-sliding-menu.twig' with { 'menu_settings' : settings } %}
+	{% include 'header-mega-menu.twig' with { 'menu_settings' : settings } %}
+
+	{% if not ('hide_country' in settings.header_options) or not ('hide_language' in settings.header_options)%}
+		<div class="modal" id="langCurrecyModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-body" style="padding: 10px">
+
+						{% include 'template_for_shipping_destination_currency_lang' with { 'hideDestination' : ('hide_country' in settings.header_options), 'hideLanguage' : ('hide_language' in settings.header_options) , 'hideCurrency' : ('hide_country' in settings.header_options)  } %}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+</header>
+<style>
+
+	.container {
+		max-width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		width: calc(100% - 30px);
+	}
+
+	@media(min-width: 1024px) {
+		.container {
+			max-width: 1440px;
+		}
+	}
+
+	.ads_banner p {
+		margin: 0;
+		font-size: 14px;
+		color: {{settings.header_top_text_color}}
+		;
+	}
+	.header-top-middel,
+	.header-top-left,
+	.header-top-right {
+		display: flex;
+		align-items: center;
+	}
+
+	.header-top-middel {
+		justify-content: center;
+	}
+	.header-top-left {
+		justify-content: start;
+		font-size: 14px;
+	}
+
+	.header-top-right {
+		justify-content: end;
+	}
+	.language-btn,
+	.currency-btn {
+		color: {{settings.header_top_text_color}}
+		;
+		font-size: 14px;
+		padding: 0;
+	}
+	a.phone-info {
+		color: {{settings.header_top_text_color}}
+		;
+		font-size: 14px;
+	}
+
+	.currency-button-area,
+	.language-button-area {
+		min-width: auto;
+		justify-content: start;
+	}
+	.language-currency {
+		border: none;
+	}
+	.language-btn span {
+		padding: 0 !important;
+	}
+	.vertical-line {
+		border-left: 0;
+		border-right: 1px solid{{settings.header_top_text_color}};
+		margin: 0 10px;
+	}
+
+	.cart-account {
+		display: flex;
+	}
+
+	.account-lang-currency .account-btn {
+		border: none;
+		padding: 0;
+		display: flex;
+		align-items: center;
+	}
+	.account-lang-currency {
+		padding: 8px 0;
+	}
+	.text-account {
+		display: grid;
+		text-align: start;
+	}
+	.account-lang-currency {
+		border: none;
+	}
+
+	.header-logo,
+	.header-cart {
+		width: auto;
+	}
+	.icon-cart-back {
+		background: #F3F5F9;
+		width: 46px;
+		height: 46px;
+		align-items: center;
+		justify-content: center;
+		display: flex;
+		border-radius: 100%;
+		margin-left: 12px;
+		font-size: 16px;
+	}
+	span.icon-user {
+		background: #F3F5F9;
+		width: 46px;
+		height: 46px;
+		align-items: center;
+		justify-content: center;
+		display: flex;
+		border-radius: 100%;
+		margin-left: 12px;
+		font-size: 16px;
+	}
+	span.cart-header-text,
+	span.login-name {
+		color: #7D879C;
+		font-size: 11px;
+	}
+	.cart-header-total {
+		margin: 4px 0 0;
+		font-size: 14px;
+	}
+	.search-header-bar > * {
+		height: auto;
+	}
+	.account-lang-currency.upper-bar.header-theme-bg-primary.header-theme-text-for-primary-bg {
+		padding: 0 !important;
+	}
+	span.account-name {
+		margin: 0;
+		font-size: 14px;
+	}
+	.cart-badge {
+		background-color: var(--text-color-primary-bg);
+	}
+	.btn-dark:not(:disabled):not(.disabled):active,
+	.btn-dark:not(:disabled):not(.disabled).active,
+	.show > .btn-dark.dropdown-toggle {
+		color: unset;
+		background-color: unset;
+		border-color: unset;
+		box-shadow: unset;
+	}
+	.cart-header-total {
+		margin-right: unset;
+		margin-left: unset;
+	}
+	.account {
+		margin-right: 25px;
+	}
+	.search-input {
+		margin: 0 100px;
+	}
+	ul.main-nav {
+		justify-content: start !important;
+	}
+
+	.top-main-menu-wrapper {
+		margin-right: 0;
+		margin-left: 0;
+		display: flex;
+	}
+	.vertical-menu-content {
+		background-color: #fff;
+		border: 1px solid #ddd;
+		display: none;
+		position: absolute;
+		top: 100%;
+		min-width: 270px;
+		z-index: 300;
+		padding: 0 12px;
+	}
+	.vertical-menu-block:hover .vertical-menu-content {
+		display: block;
+	}
+	ul.main-nav > li > a {
+
+		font-size: 16px !important;
+	}
+	.block-title-menu {
+		font-size: 16px;
+		padding: 0 0 0 15px;
+		border-left: 1px solid #E3E9EF;
+		display: flex;
+		align-items: center;
+		height: 44px;
+	}
+	ul.main-nav.main-nav-vertical {
+		display: grid;
+		width: 100%;
+		padding: 15px 0;
+	}
+	.block-title-menu:before {
+		font-family: 'icomoon' !important;
+		speak: never;
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		content: "\e957";
+		font-size: 25px;
+		margin-left: 10px;
+		color: var(--text-color-primary-bg);
+	}
+	.block-title-menu:after {
+		font-family: 'icomoon' !important;
+		speak: never;
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		line-height: 0;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		content: "\e912";
+		font-size: 20px;
+		margin-right: 3px;
+		color: var(--menu-header-text-color-primary-bg);
+	}
+	.search-header {
+		padding: 0;
+	}
+	ul.main-nav.main-nav-vertical > li {
+		width: 270px;
+	}
+
+
+	@media(max-width: 991px) {
+		.sm-search-div {
+			visibility: visible !important;
+			display: block !important;
+			transform: translateY(0%);
+			-webkit-transform: translate3d(0, 0, 0);
+			background: #F3F5F9;
+			padding: 15px;
+		}
+		.sm-search-icon {
+			display: none !important;
+		}
+		.header-top-left {
+
+			display: none;
+		}
+		.header-top-right {
+			display: none;
+		}
+
+		.header-top-middel.col-6 {
+			flex: 0 0 100%;
+			max-width: 100%;
+			padding: 10px 0;
+		}
+
+		.container {
+			padding-right: 0;
+			padding-left: 0;
+		}
+		.search-header-bar {
+			justify-content: space-between;
+		}
+		.account {
+			display: none;
+		}
+
+		.menu.icon-menu-top {
+			background: #F3F5F9;
+			width: 46px;
+			height: 46px;
+			align-items: center;
+			justify-content: center;
+			display: flex !important;
+			border-radius: 100%;
+		}
+		.icon-menu-top > span {
+			font-size: 21px;
+		}
+	}
+</style>
+{% schema %}
+{
+   "name":{
+      "ar":"اعلى الصفحة",
+      "en":"Header"
+   },
+   "icon":"fa fa-square",
+   "display":true,
+   "settings":{
+      "header_top":{
+         "type":"fieldset",
+         "label":{
+            "ar":"اعلى الهيدير",
+            "en":"Header Top"
+         },
+         "icon":"font_awesome",
+         "expandable":true,
+         "settings":{
+            "text_phone":{
+               "type":"text",
+               "label":{
+                  "ar":" الهاتف",
+                  "en":" Phone"
+               }
+            },
+            "text_ads":{
+               "type":"text",
+               "label":{
+                  "ar":"اعلان ",
+                  "en":" ads"
+               }
+            },
+            "text_color":{
+               "type":"color",
+               "label":{
+                  "ar":"لون النص",
+                  "en":"Text color"
+               }
+            }
+         }
+      },
+      "header":{
+         "type":"fieldset",
+         "label":{
+            "ar":"رأس الصفحة",
+            "en":"Header"
+         },
+         "icon":"font_awesome",
+         "expandable":true,
+         "settings":{
+            "logo":{
+               "type":"image",
+               "label":{
+                  "ar":"الشعار",
+                  "en":"Logo"
+               },
+               "info":{
+                  "ar":"ارفع صورة بحجم 750 * 750 ",
+                  "en":"This is an info text sample here"
+               }
+            },
+            "logo_mobile":{
+               "type":"image",
+               "label":{
+                  "ar":" الشعار للجوال (اختياري)",
+                  "en":"Logo mobile (optional)"
+               },
+               "info":{
+                  "ar":"ارفع صورة بحجم 322 * 750 ",
+                  "en":"This is an info text sample here"
+               }
+            },
+            "options":{
+               "type":"checkboxes",
+               "label":{
+                  "ar":"الخيارات",
+                  "en":"Options"
+               },
+               "options":[
+                  {
+                     "value":"hide_search_bar",
+                     "label":{
+                        "ar":"إخفاء شريط البحث",
+                        "en":"Hide search bar"
+                     }
+                  },
+                  {
+                     "value":"hide_language",
+                     "label":{
+                        "ar":"إخفاء اللغة",
+                        "en":"Hide language"
+                     }
+                  },
+                  {
+                     "value":"hide_country",
+                     "label":{
+                        "ar":"إخفاء اسم الدولة",
+                        "en":"Hide country"
+                     }
+                  }
+               ]
+            },
+            "search_placeholder":{
+               "type":"text",
+               "label":{
+                  "ar":"تلميح شريط البحث",
+                  "en":"Search placeholder"
+               }
+            }
+         }
+      },
+      "nav":{
+         "type":"fieldset",
+         "label":{
+            "ar":"جميع الفئات",
+            "en":"All categories"
+         },
+         "icon":"font_awesome",
+         "expandable":true,
+         "settings":{
+            "display":{
+               "type":"checkbox",
+               "label":{
+                  "ar":" ",
+                  "en":" "
+               },
+               "option":{
+                  "ar":"إظهار",
+                  "en":"Display menu"
+               },
+               "noLabel":true
+            },
+            "categories":{
+               "type":"list",
+               "noLabel":true,
+               "settings_label":{
+                  "ar":"التصنيف",
+                  "en":"Item"
+               },
+               "settings":{
+                  "title":{
+                     "type":"text",
+                     "label":{
+                        "ar":"العنوان",
+                        "en":"text"
+                     }
+                  },
+                  "url":{
+                     "type":"url",
+                     "label":{
+                        "ar":"الرابط",
+                        "en":"Link"
+                     }
+                  }
+               }
+            },
+            "text_color":{
+               "type":"color",
+               "label":{
+                  "ar":"لون النص",
+                  "en":"Text color"
+               }
+            }
+         }
+      }
+   }
+}
+{% endschema %}

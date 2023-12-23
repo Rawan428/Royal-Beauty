@@ -1,0 +1,25 @@
+<div class="account-lang-currency upper-bar header-theme-bg-primary header-theme-text-for-primary-bg">
+	<div class="d-flex">
+		<div class="account-area">
+			{% if customer %}
+				<button type="button" onclick="window.location.href='/account-profile'" class="btn btn-dark account-btn">
+					<span class="icon-user header-theme-icon-primary" style="position: relative; top: 1px"></span>
+					<div class="text-account">
+						<span class="login-name">{{ locals.hello }},&nbsp;{{ customer.name }}&nbsp;</span>
+						<span class="account-name">{{ locals.account }}</span>
+					</div>
+
+				</button>
+			{% else %}
+				<button type="button" onclick="window.location.href='/auth/login'" class="btn btn-dark account-btn">
+					<span class="icon-user header-theme-icon-primary" style="position: relative; top: 1px"></span>
+					<div class="text-account">
+						<span class="login-name">{{ locals.hello }},&nbsp;{{ locals.login }}</span>
+						<span class="account-name">{{ locals.account }}</span>
+
+					</div>
+				</button>
+			{% endif %}
+		</div>
+	</div>
+</div>
