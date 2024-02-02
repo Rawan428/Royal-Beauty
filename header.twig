@@ -59,6 +59,43 @@
 			</div>
 		</div>
 	</div>
+	<div class="header-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-4">
+					<div class="" data-toggle="modal" data-target="#langCurrecyModal">
+						<div class="">
+							<button type="submit" class=' setting-btn'>
+								<i class="fa-solid fa-globe"></i>
+							</button>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-4">
+					<button type="button" onclick="window.location.href='/'" class=" home-btn">
+						<i class="fa-solid fa-house"></i>
+
+					</button>
+				</div>
+				<div class="col-4">
+					<div class="account-area">
+						{% if customer %}
+							<button type="button" onclick="window.location.href='/account-profile'" class=" account-btn">
+								<i class="fa-solid fa-circle-user"></i>
+
+
+							</button>
+						{% else %}
+							<button type="button" onclick="window.location.href='/auth/login'" class=" account-btn">
+								<i class="fa-solid fa-circle-user"></i>
+							</button>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	{% include 'header-sliding-menu.twig' with { 'menu_settings' : settings } %}
 	{% include 'header-mega-menu.twig' with { 'menu_settings' : settings } %}
@@ -358,6 +395,101 @@
 		.icon-menu-top > span {
 			font-size: 21px;
 		}
+		.icon-cart-back {
+
+			margin-left: 0;
+			margin-right: 0;
+
+		}
+		.icon-menu-top {
+			margin-right: unset !important;
+			margin-left: unset !important;
+		}
+		.app-content {
+			margin-top: 70px;
+		}
+
+	}
+	.search-header .image-logo {
+		width: 200px !important;
+		height: auto;
+	}
+
+	body.ltr .block-title-menu {
+		border-left: none;
+		border-right: 1px solid #E3E9EF;
+		padding-left: 0;
+		padding-right: 15px;
+	}
+
+	body.ltr ul.main-nav > li > a.mega-menu > span:after {
+		margin-right: 0;
+		margin-left: 10px;
+	}
+
+	body.ltr .icon-cart-back {
+		margin-left: 0;
+		margin-right: 12px;
+	}
+
+	body.ltr span.icon-user {
+		margin-left: 0;
+		margin-right: 12px;
+	}
+
+	body.ltr .account {
+		margin-left: 25px;
+		margin-right: 0;
+	}
+	body.ltr .block-title-menu:before {
+		margin-left: 0;
+		margin-right: 10px;
+	}
+	/*header bottom */
+	@media(min-width: 992px) {
+		.header-bottom {
+			display: none
+		}
+
+	}
+
+	.header-bottom {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 880;
+		background-color: #F3F5F9;
+		height: 50px;
+		box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+		-moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+		-webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+		-o-box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+	}
+
+	button.setting-btn,
+	button.home-btn,
+	button.account-btn {
+		border: none;
+		background: transparent;
+		font-size: 23px;
+		display: flex;
+		height: 50px;
+		align-items: center;
+		color: var(--primary-color);
+	}
+	div.header-bottom > .search-header .image-logo {
+		padding: 0;
+		width: 200px !important;
+		height: auto;
+	}
+	div.header-bottom > div > div > div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.slide-menu-static {
+		display: none;
 	}
 </style>
 {% schema %}
